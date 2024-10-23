@@ -13,14 +13,12 @@ def isPrime(num):
 
 def neighbourPrime(n):
     if(n%2!=0):
-        return 0
+        return []
     lst=[]
-    for i in range(n,n//2,-1):
-        for j in range(n//2):
-            if(i+j>n):
-                break
-            if((isPrime(i) + isPrime(j))==n):
-                lst.append((i,j))
+    for i in range(2,n//2 + 1):
+        j = n - i
+        if isPrime(i) and isPrime(j):
+            lst.append((i, j))
     return lst
 
-print("Kombinacije: "+str(neighbourPrime(240)))
+print("Kombinacije: "+str(neighbourPrime(10)))

@@ -13,6 +13,7 @@ def numOfPrime(a,b):
     cnt=0
     for i in range(int(a),math.ceil(b)):
         if(isPrime(i)):
+            print(i)
             cnt+=1
     return cnt
 
