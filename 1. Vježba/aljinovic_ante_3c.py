@@ -16,5 +16,5 @@ def neighbourPrime(n):
             lst.append((i,i+2))
     return lst
 
-print("Susjedi: "+str(neighbourPrime(100)))
+print("Susjedi: "+str(neighbourPrime(20)))
 
