@@ -1,5 +1,5 @@
-# 2. Napisati program u kojem korisnik unosi granice dvaju zatvorenih 
-# intervala [a, b] i [c, d] i ispisuje njihov presjek. Primjer: Za intervale [1, 5]
+# 2. Napisati program u kojem korisnik unosi granice dvaju zatvorenih intervala [a, b] i [c, d] 
+# i ispisuje njihov presjek. Primjer: Za intervale [1, 5]
 # i [-3, 2], presjek je interval [1, 2], a za intervale [-3.5, 2] i [4, 6.5]
 # presjek je prazan skup.
 from math import ceil
@@ -14,7 +14,7 @@ while True:
         d=float(input("Unesi drugu granicu drugog intervala: "))
         if(b<a):
             a,b=b,a
-        elif(d<c):
+        if(d<c):
             c,d=d,c
         start=max(a,c)
         end=min(b,d)
@@ -22,8 +22,5 @@ while True:
         for i in range(int(ceil(start)),int(math.floor(end+1))):
             lst.append(i)
         print(lst)
-
     except ValueError as e:
         print("Pogreska: ",e)
-
-

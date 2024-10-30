@@ -8,19 +8,23 @@
 
 import random
 
+
 def igra():
-    pravila = {
-        "kamen": "škare",
-        "škare": "papir",
-        "papir": "kamen",
+    pravila={
+        "kamen":"škare",
+        "škare":"papir",
+        "papir":"kamen"
     }
     igrac_brojac=0
     kompjuter_brojac=0    
     mogucnosti=pravila.keys()
+    # print(mogucnosti)
     # print(list(mogucnosti))
     while True:
         print("Trenutni rezultat: IGRAC ",igrac_brojac," - ", kompjuter_brojac," KOMPJUTER")
-        igrac_izbor=input("Izaberi: kamen, škare ili papir: ")
+        igrac_izbor=input("Izaberi: kamen, škare, papir ili 0 za prekid igre: ")
+        if(igrac_izbor=="0"):
+            break
         if(igrac_izbor not in list(mogucnosti)):
             print("Pogrešan izbor, pokušajte ponovo")
             continue
