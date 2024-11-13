@@ -1,6 +1,6 @@
 # 3. Napisati funkciju u kojoj se ispituje je li graf Eulerov.
 
-from readPajek import main
+from aljinovic_ante_04_00 import main
 
 def getGraph():    
     return main()

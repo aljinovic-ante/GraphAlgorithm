@@ -2,7 +2,7 @@
 # matricu incidencije i listu susjedstva grafa (iz svake strukture radi se konverzija u
 # ostale dvije).
 
-from readPajek import main
+from aljinovic_ante_04_00 import main
 def getGraph():    
     return main()
 

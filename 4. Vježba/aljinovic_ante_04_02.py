@@ -4,7 +4,7 @@
 # — stupanj svakog vrha
 # — vrhove s maksimalnim brojem incidentnih bridova
 
-from readPajek import main
+from aljinovic_ante_04_00 import main
 
 def getGraph():    
     return main()

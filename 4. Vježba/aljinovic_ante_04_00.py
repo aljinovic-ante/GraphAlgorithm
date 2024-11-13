@@ -50,7 +50,7 @@ def main():
     vertices, edges = readPajek(file_path)
     adjacency_list = create_adjacency_list(vertices, edges)
 
-    # print(adjacency_list)
+    print(adjacency_list)
 
     return adjacency_list
 
