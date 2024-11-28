@@ -49,23 +49,47 @@ def prim_algorithm(vertices,edges):
     return total_w,mst_edges
     
 
-    print("neighb",neighbourin_edges)
-    
-    print("graph: ", graph)
-    print("ovde:", min_edge)
+class UnionFind:
+    def __init__(self, num_vertices):
+        self.parent = list(range(num_vertices))
 
-    
-def kruskal_algorithm(vertices,edges):
-    return None
+    def find(self, v):
+        if self.parent[v] != v:
+            self.parent[v] = self.find(self.parent[v])
+        return self.parent[v]
 
-def main():
-    vertices,edges=aljinovic_ante_05_00.main()
+    def union(self, u, v):
+        root_u = self.find(u)
+        root_v = self.find(v)
+        if root_u != root_v:
+            self.parent[root_v] = root_u
+
+def kruskal_algorithm(vertices, edges):
+    uf = UnionFind(len(vertices))
+    
+    sorted_edges = sorted(edges, key=lambda edge: edge[2])
+    
+    mst_edges = []
+    total_weight = 0
+    
+    for u, v, w in sorted_edges:
+        if uf.find(u) != uf.find(v):
+            uf.union(u, v)
+            mst_edges.append((u, v, w))
+            total_weight += w
+    
+    return total_weight, mst_edges
+
+def main(fileName):
+    vertices,edges=aljinovic_ante_05_00.main(fileName)
     print("hehe")
     total_weight,mst_prim=prim_algorithm(vertices,edges)
+    print('----------------PRIM ALGORITHM------------------------')
     print(total_weight,mst_prim)
-    mst_kruskal=kruskal_algorithm(vertices,edges)
-    print(mst_kruskal)
+    total_weight,mst_prim=kruskal_algorithm(vertices,edges)
+    print('----------------KRUSKAL ALGORITHM---------------------')
+    print(total_weight,mst_prim)
 
 
 if __name__=="__main__":
-    main()
+    main('airports.net')
