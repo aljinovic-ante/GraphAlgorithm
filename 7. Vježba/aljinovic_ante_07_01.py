@@ -16,7 +16,7 @@ def dijkstra_algorithm(vertices, edges, starting_vertex):
 
     visited = set()
 
-    while len(visited) < len(vertices):
+    while len(vertices) > len(visited):
         current_vertex = None
         current_distance = float('inf')
 
@@ -58,7 +58,7 @@ def bellman_ford_algorithm(vertices, edges, starting_vertex):
 
     for src, dest, weight in edges:
         if distances[src] + weight < distances[dest]:
-            raise ValueError("Graph contains a negative-weight cycle")
+            raise ValueError("Negative-weight cycle detected..error")
 
     return distances, paths
 
@@ -67,14 +67,14 @@ def main(fileName):
     print(vertices,edges)
 
     start_time = time.time()
-    dijkstra_distances,dijkstra_paths = dijkstra_algorithm(vertices, edges, 0)
+    dijkstra_distances,dijkstra_paths = dijkstra_algorithm(vertices, edges, 5)
     print("\nDIJKSTRA ALGORITHM\n")
     print(dijkstra_distances)
     print(dijkstra_paths)
     print("Time: ",time.time() - start_time," seconds\n\n")
 
     start_time = time.time()
-    bellman_ford_distances,bellman_ford_paths = bellman_ford_algorithm(vertices, edges, 0)
+    bellman_ford_distances,bellman_ford_paths = bellman_ford_algorithm(vertices, edges, 5)
     print("BELLMAN FORD ALGORITHM\n")
     print(bellman_ford_distances)
     print(bellman_ford_paths)
