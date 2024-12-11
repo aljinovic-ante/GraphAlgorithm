@@ -19,7 +19,9 @@ def readPajek(fileName):
                 parts=line.split()
                 vertexID=int(parts[0])
                 vertexLABEL=parts[1].strip('"')
-                vertices[vertexID]=vertexLABEL
+                vertexX=parts[2]
+                vertexY=parts[3]
+                vertices[vertexID]={(vertexLABEL,vertexX,vertexY)}
             
             elif mode=="e":
                 edge = tuple(map(int, line.split()))

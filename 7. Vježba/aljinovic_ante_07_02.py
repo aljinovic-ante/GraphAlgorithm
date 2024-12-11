@@ -3,17 +3,27 @@ import aljinovic_ante_07_00
 # Napisati program koji traži najkraći put između dva grada koristeći:
 # (a) Greedy BFS
 # (b) A* algoritam
+def euclidean_distance(x1, y1, x2, y2):
+    return ((int(x2) - int(x1)) ** 2 + (int(y2) - int(y1)) ** 2) ** 0.5
+
 def greedy_BFS_algorithm(vertices, edges, starting_vertex, end_vertex):
     visited = set()
     path = []
     current_vertex = starting_vertex
-
+    
     while current_vertex != end_vertex:
         visited.add(current_vertex)
         path.append(current_vertex)
 
-        neighbors = []
+        current_data = list(vertices[current_vertex])[0]
+        current_x = current_data[1]
+        current_y = current_data[2]
 
+        target_data = list(vertices[end_vertex])[0]
+        target_x = target_data[1]
+        target_y = target_data[2]
+        
+        neighbors = []
         for src, dest, weight in edges:
             if src == current_vertex and dest not in visited:
                 neighbors.append((dest, weight))
@@ -21,7 +31,21 @@ def greedy_BFS_algorithm(vertices, edges, starting_vertex, end_vertex):
         if not neighbors:
             return "Path not found"
 
-        current_vertex, _ = min(neighbors, key=lambda x: x[1])
+        closest_vertex = None
+        min_distance = float('inf')
+
+        for neighbor, _ in neighbors:
+            neighbor_data = list(vertices[neighbor])[0]
+            neighbor_x = neighbor_data[1]
+            neighbor_y = neighbor_data[2]
+
+            distance = euclidean_distance(neighbor_x, neighbor_y, target_x, target_y)
+
+            if distance < min_distance:
+                min_distance = distance
+                closest_vertex = neighbor
+
+        current_vertex = closest_vertex
 
     path.append(end_vertex)
     return path
@@ -38,8 +62,11 @@ def a_star_algorithm(vertices, edges, starting_vertex, end_vertex):
     paths[starting_vertex] = [starting_vertex]
 
     open_list = [(starting_vertex, 0)]
-
     visited = set()
+
+    target_data = list(vertices[end_vertex])[0]
+    target_x = target_data[1]
+    target_y = target_data[2]
 
     while open_list:
         current_vertex, current_cost = min(open_list, key=lambda x: x[1])
@@ -50,10 +77,19 @@ def a_star_algorithm(vertices, edges, starting_vertex, end_vertex):
 
         visited.add(current_vertex)
 
+        current_data = list(vertices[current_vertex])[0]
+        current_x = current_data[1]
+        current_y = current_data[2]
+
         for src, dest, weight in edges:
             if src == current_vertex and dest not in visited:
                 g_cost = distances[current_vertex] + weight
-                h_cost = 0 
+
+                dest_data = list(vertices[dest])[0]
+                dest_x = dest_data[1]
+                dest_y = dest_data[2]
+                h_cost = euclidean_distance(dest_x, dest_y, target_x, target_y)
+
                 f_cost = g_cost + h_cost
 
                 if g_cost < distances[dest]:
