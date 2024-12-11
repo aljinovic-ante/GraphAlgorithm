@@ -12,7 +12,11 @@ def greedy_BFS_algorithm(vertices, edges, starting_vertex, end_vertex):
         visited.add(current_vertex)
         path.append(current_vertex)
 
-        neighbors = [(dest, weight) for src, dest, weight in edges if src == current_vertex and dest not in visited]
+        neighbors = []
+
+        for src, dest, weight in edges:
+            if src == current_vertex and dest not in visited:
+                neighbors.append((dest, weight))
 
         if not neighbors:
             return "Path not found"
@@ -23,10 +27,14 @@ def greedy_BFS_algorithm(vertices, edges, starting_vertex, end_vertex):
     return path
 
 def a_star_algorithm(vertices, edges, starting_vertex, end_vertex):
-    distances = {vertex: float('inf') for vertex in vertices}
+    distances = {}
+    for vertex in vertices:
+        distances[vertex] = float('inf')
     distances[starting_vertex] = 0
 
-    paths = {vertex: [] for vertex in vertices}
+    paths = {}
+    for vertex in vertices:
+        paths[vertex] = []
     paths[starting_vertex] = [starting_vertex]
 
     open_list = [(starting_vertex, 0)]
