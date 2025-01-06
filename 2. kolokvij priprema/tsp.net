@@ -1,0 +1,17 @@
+*vertices 5
+1 Split
+2 Minhen
+3 Bec
+4 Prag
+5 Budimpesta
+*edges
+1 2 873
+1 3 764
+1 4 1074
+1 5 738
+2 3 454
+2 4 381
+2 5 684
+3 4 333
+3 5 243
+4 5 525
