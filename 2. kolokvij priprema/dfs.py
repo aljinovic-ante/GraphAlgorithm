@@ -14,6 +14,8 @@ def dfs(vertices,edges):
                     for edge in edges:
                         if edge[0]==v and edge[1] not in visited:
                             stack.append(edge[1])
+                        elif edge[1]==v and edge[0] not in visited:
+                            stack.append(edge[0])
     
     return visited
 
