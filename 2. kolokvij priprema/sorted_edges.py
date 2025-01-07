@@ -29,7 +29,7 @@ def sorted_edges(vertices, edges):
             v_d[v]+=1
             union(u,v)
 
-        if len(tour)==len(vertices):
+        if len(tour)<len(vertices)-1:
             break
     
     for u,v,_ in edges:
