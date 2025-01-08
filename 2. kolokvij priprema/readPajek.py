@@ -2,7 +2,7 @@ def readPajek():
     mode=None
     vertices={}
     edges=[]
-    with open('tsp.net','r') as f:
+    with open('gradovi-udaljenosti.net','r') as f:
         for line in f:
             line=line.strip()
             # print(line)
