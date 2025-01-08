@@ -1,47 +1,40 @@
 import readPajek
 
 def gbfs(vertices, edges):
-    path=[]
-    visited=[]
-    current_vertex=1
-    end_vertex=10
+    path = []
+    visited = set()
+    current = 1
+    end = 10
 
-    while current_vertex!=end_vertex:
-        neighbors=[]
-        visited.append(current_vertex)
-        path.append(current_vertex)
+    def dist(x1, y1, x2, y2):
+        return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+
+    while current != end:
+        visited.add(current)
+        path.append(current)
+        neighbors = []
         for edge in edges:
-            if edge[0]==current_vertex and end_vertex not in visited:
-                neighbors.append((edge[1],edge[2]))
-
-        t_x=list(vertices[end_vertex])[0][1]
-        t_y=list(vertices[end_vertex])[0][2]
+            if edge[0] == current and edge[1] not in visited:
+                neighbors.append((edge[1], edge[2]))
 
         if not neighbors:
-            raise ValueError("ERROR")
-        
-        closest_v=None
-        closes_w=float('inf')
+            raise ValueError("no path found")
 
-        def euclidean_distance(x1, y1, x2, y2):
-            return ((int(x2) - int(x1)) ** 2 + (int(y2) - int(y1)) ** 2) ** 0.5
+        t_data = list(vertices[end])[0]
+        t_x, t_y = t_data[1], t_data[2]
 
-        for n,w in neighbors:
-            n_data=list(vertices[n])[0]
-            n_x=n_data[1]
-            n_y=n_data[2]
+        distances = []
+        for n, w in neighbors:
+            n_data = list(vertices[n])[0]
+            n_x, n_y = n_data[1], n_data[2]
+            distance = dist(n_x, n_y, t_x, t_y)
+            distances.append((n, distance))
 
-            distance = euclidean_distance(n_x,n_y,t_x,t_y)
+        closest = min(distances, key=lambda x: x[1])[0]
+        current = closest
 
-            if distance<closes_w:
-                closes_w=distance
-                closest_v=n
-            
-        current_vertex=closest_v
-
-    path.append(end_vertex)
+    path.append(end)
     return path
-
 
 
 def main():
