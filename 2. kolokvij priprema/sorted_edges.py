@@ -21,16 +21,13 @@ def sorted_edges(vertices, edges):
         if root_u!=root_v:
             parent[root_v]=root_u
 
-    while sorted_edges: 
+    while sorted_edges and len(tour)<len(vertices)-1: 
         u,v,_ = sorted_edges.pop(0)
         if v_d[u]<2 and v_d[v]<2 and find(u)!=find(v):
             tour.append((u,v))
             v_d[u]+=1
             v_d[v]+=1
             union(u,v)
-
-        if len(tour)==len(vertices):
-            break
     
     for u,v,_ in edges:
         if (u,v) not in tour and (v,u) not in tour:
